@@ -34,16 +34,36 @@
                       props={props}
                       on={on}
                       data={tableData}>
-                    <el-table-column
-                        prop="name"
-                        label="姓名"
-                        width="180">
-                    </el-table-column>
+                    {this.renderColumns()}
                   </el-table>
               )
             },
-            renderColumn() {
+            renderColumns(){
                 const {columns} = this
+                return columns
+                    .filter(e => !e.hidden)
+                    .map(column => {
+                        console.log('column', column)
+                        if (column.columns) {
+                            // 多级列
+                            return this.renderColumn(column, this.renderColumns(column.columns))
+                        } else if (column.component){
+                            // 自定义组件
+
+                        } else {
+                            // 常规列
+                            return this.renderColumn(column)
+                        }
+                    })
+            },
+            renderColumn(column, children) {
+                console.log('children', children)
+                const {on} = column
+                return (
+                  <el-table-column props={column} on={on}>
+                    {children}
+                  </el-table-column>
+              )
             }
         },
         render(){

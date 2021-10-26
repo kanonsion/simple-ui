@@ -27,31 +27,48 @@
                         'cell-click': this.handleCellClick.bind(this)
                     }
                 },
-                tableData: [{name: 11}]
+                tableData: [{name: 11, age: 11, add: 11, type: 'aa'}]
             }
         },
         computed:{
             columns(){
                 return [
                     {
-                        prop: name,
+                        prop: 'name',
                         label: '姓名',
                         width: 300,
                         class: 'aaa',
+                        hidden: false,
                         style: {
                             fontSize: '40px'
                         },
                         attrs:{
                             id: 'id'
                         },
+                        // columns: [
+                        //     {
+                        //         prop: 'age',
+                        //         label: '年龄',
+                        //     },
+                        //     {
+                        //         prop:'add',
+                        //         label: '地址',
+                        //         columns: [
+                        //             {
+                        //                 prop:'type',
+                        //                 labe: '类型',
+                        //             }
+                        //         ]
+                        //     }
+                        // ],
                         ref: '',
-                        component:{
-                            dom: '',
-                            options:{
-                                props:{},
-                                on: {}
-                            }
-                        }
+                        // component:{
+                        //     dom: '',
+                        //     options:{
+                        //         props:{},
+                        //         on: {}
+                        //     }
+                        // }
                     }
                 ]
             }
