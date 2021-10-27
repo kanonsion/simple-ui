@@ -1,4 +1,5 @@
 <script type="text/jsx">
+    import {merge} from 'lodash'
     /*
      * 通过解析配置项，生成表格
      * */
@@ -8,7 +9,19 @@
             return {
                 defaultTaleOptions:{
                     ref: 'simpleTable'
-                }
+                },
+                defaultPaginationOptions:{
+                    props: {
+                        layout: "total, sizes, prev, pager, next, jumper",
+                        pageSizes: [10,20,30,50],
+                        pageSize: 10,
+                    },
+                    on: {
+                        'size-change': this.handleChangeSize.bind(this),
+                        'current-change': this.handleChangePage.bind(this),
+                    }
+                },
+                currentPaginationOptions: {}
             }
         },
         props:{
@@ -23,6 +36,18 @@
             columns: {
                 type: Array,
                 default: () => []
+            },
+            isShowPagination:{
+                type: Boolean,
+                default: true
+            },
+            paginationOptions:{
+                type: Object,
+                default: () => ({})
+            },
+            total: {
+                type: Number,
+                default: 0
             }
         },
         methods:{
@@ -30,12 +55,15 @@
                 const {defaultTaleOptions, tableOptions, tableData, columns} = this
                 const {props, on} = {...defaultTaleOptions, ...tableOptions}
                 return (
-                  <el-table
-                      props={props}
-                      on={on}
-                      data={tableData}>
-                    {this.renderColumns(columns)}
-                  </el-table>
+                  <div>
+                    <el-table
+                        props={props}
+                        on={on}
+                        data={tableData}>
+                      {this.renderColumns(columns)}
+                    </el-table>
+                    {this.renderPagination()}
+                  </div>
               )
             },
             renderColumns(columns){
@@ -84,6 +112,33 @@
                         {children}
                       </el-table-column>
                     )
+                }
+            },
+            renderPagination(){
+                const {props, on} = this.currentPaginationOptions
+                return (
+                    <el-pagination props={props} on={on}></el-pagination>
+                )
+            },
+            handleChangeSize(pageSize){
+                // 重置为第一页
+                this.$emit('updatePagination', {
+                    pageSize,
+                    currentPage: 1
+                })
+            },
+            handleChangePage(currentPage){
+                this.$emit('updatePagination', {
+                    pageSize: this.currentPaginationOptions.props.pageSize,
+                    currentPage
+                })
+            }
+        },
+        watch: {
+            paginationOptions: {
+                immediate: true,
+                handler(){
+                    this.currentPaginationOptions = merge(this.defaultPaginationOptions, this.paginationOptions)
                 }
             }
         },

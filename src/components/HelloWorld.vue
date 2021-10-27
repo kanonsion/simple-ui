@@ -4,6 +4,7 @@
         <simple-table
             :tableOptions="tableOptions"
             :tableData="tableData"
+            :paginationOptions="paginationOptions"
             :columns="columns">
         </simple-table>
     </div>
@@ -26,6 +27,11 @@
                     },
                     on:{
                         'cell-click': this.handleCellClick.bind(this)
+                    }
+                },
+                paginationOptions: {
+                    props: {
+                        pageSize: 20
                     }
                 },
                 tableData: [{name: 11, age: 11, add: 11, type: 'aa'}]
