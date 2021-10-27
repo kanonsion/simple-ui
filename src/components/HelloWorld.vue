@@ -12,6 +12,7 @@
 <script>
     import XjlTable from "./table/index-full-el"
     import SimpleTable from "./simple-table"
+    import Hello from './hello'
     export default {
         name: 'hello-world',
         components: {SimpleTable, XjlTable},
@@ -37,7 +38,6 @@
                         prop: 'name',
                         label: '姓名',
                         width: 300,
-                        class: 'aaa',
                         hidden: false,
                         style: {
                             fontSize: '40px'
@@ -45,30 +45,24 @@
                         attrs:{
                             id: 'id'
                         },
-                        // columns: [
-                        //     {
-                        //         prop: 'age',
-                        //         label: '年龄',
-                        //     },
-                        //     {
-                        //         prop:'add',
-                        //         label: '地址',
-                        //         columns: [
-                        //             {
-                        //                 prop:'type',
-                        //                 labe: '类型',
-                        //             }
-                        //         ]
-                        //     }
-                        // ],
                         ref: '',
-                        // component:{
-                        //     dom: '',
-                        //     options:{
-                        //         props:{},
-                        //         on: {}
-                        //     }
-                        // }
+                    },
+                    {
+                        prop: 'add',
+                        label: '年龄',
+                        render: props => {
+                            return <h1>{props.row.type}</h1>
+                        }
+                    },
+                    {
+                        prop: 'type',
+                        label: '类型',
+                        component:{
+                            dom: Hello,
+                            options: {
+
+                            }
+                        }
                     }
                 ]
             }

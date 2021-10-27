@@ -27,43 +27,64 @@
         },
         methods:{
             renderTable() {
-                const {defaultTaleOptions, tableOptions, tableData} = this
+                const {defaultTaleOptions, tableOptions, tableData, columns} = this
                 const {props, on} = {...defaultTaleOptions, ...tableOptions}
                 return (
                   <el-table
                       props={props}
                       on={on}
                       data={tableData}>
-                    {this.renderColumns()}
+                    {this.renderColumns(columns)}
                   </el-table>
               )
             },
-            renderColumns(){
-                const {columns} = this
+            renderColumns(columns){
                 return columns
                     .filter(e => !e.hidden)
                     .map(column => {
-                        console.log('column', column)
                         if (column.columns) {
                             // 多级列
                             return this.renderColumn(column, this.renderColumns(column.columns))
-                        } else if (column.component){
-                            // 自定义组件
-
                         } else {
-                            // 常规列
+                            // 常规列或者自定义组件
                             return this.renderColumn(column)
                         }
                     })
             },
             renderColumn(column, children) {
-                console.log('children', children)
                 const {on} = column
-                return (
-                  <el-table-column props={column} on={on}>
-                    {children}
-                  </el-table-column>
-              )
+                if (column.component){
+                    // 自定义组件-component形式
+                    const {dom} = column.component
+                    const scopedSlots = {
+                        default: (props) => <dom row={props.row}/>
+                    }
+                    return (
+                      <el-table-column
+                          props={column}
+                          on={on}
+                          scopedSlots={scopedSlots}>
+                      </el-table-column>
+                    )
+                } else if (column.render){
+                    // 自定义组件-render形式
+                    const scopedSlots = {
+                        default: (props) => column.render(props)
+                    }
+                    return (
+                      <el-table-column
+                          props={column}
+                          on={on}
+                          scopedSlots={scopedSlots}>
+                      </el-table-column>
+                    )
+                } else {
+                    return (
+                      <el-table-column props={column} on={on}>
+                        {children}
+                      </el-table-column>
+                    )
+                }
             }
         },
         render(){
