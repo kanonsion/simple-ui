@@ -1,7 +1,20 @@
 {
   "name": "simple-table",
   "version": "0.1.0",
+  "description": "更简洁的element-table",
   "private": true,
+  "author": "https://github.com/kanonsion",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kanonsion/simple-table"
+  },
+  "keywords": [
+    "vue",
+    "element-ui",
+    "table",
+    "data-table",
+    "element table"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -14,11 +27,7 @@
     }
   },
   "dependencies": {
-    "core-js": "^3.6.5",
-    "element-ui": "^2.15.6",
-    "husky": "^7.0.4",
-    "lodash": "^4.17.21",
-    "vue": "^2.6.11"
+    "lodash": "^4.17.21"
   },
   "devDependencies": {
     "@commitlint/cli": "^13.2.1",
@@ -35,7 +44,11 @@
     "eslint-plugin-vue": "^6.2.2",
     "vue-template-compiler": "^2.6.11",
     "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1"
+    "sass-loader": "^7.0.1",
+    "husky": "^7.0.4",
+    "vue": "^2.6.11",
+    "core-js": "^3.6.5",
+    "element-ui": "^2.15.6"
   },
   "eslintConfig": {
     "root": true,
