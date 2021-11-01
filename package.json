@@ -1,8 +1,8 @@
 {
-  "name": "simple-table",
+  "name": "w-simple-table",
   "version": "0.1.0",
   "description": "更简洁的element-table",
-  "private": true,
+  "private": false,
   "author": "https://github.com/kanonsion",
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "lib": "vue-cli-service build --target lib --name wsimpleTable --dest lib packages/index.js"
   },
   "husky": {
     "hooks": {
