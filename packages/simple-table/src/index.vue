@@ -85,7 +85,13 @@
                     // 自定义组件-component形式
                     const {dom} = column.component
                     const scopedSlots = {
-                        default: (props) => <dom row={props.row}/>
+                        default: (props) => (
+                            <dom
+                                row={props.row}
+                                props={column.component.props}
+                                on={column.component.on}>
+                            </dom>
+                        )
                     }
                     return (
                       <el-table-column
@@ -117,7 +123,10 @@
             renderPagination(){
                 const {props, on} = this.currentPaginationOptions
                 return (
-                    <el-pagination props={props} on={on}></el-pagination>
+                    <el-pagination
+                        props={props}
+                        on={on}>
+                    </el-pagination>
                 )
             },
             handleChangeSize(pageSize){
