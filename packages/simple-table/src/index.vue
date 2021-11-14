@@ -88,6 +88,7 @@
                         default: (props) => (
                             <dom
                                 row={props.row}
+                                rowIndex={props.$index}
                                 props={column.component.props}
                                 on={column.component.on}>
                             </dom>
