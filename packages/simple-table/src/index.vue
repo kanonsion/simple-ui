@@ -62,7 +62,7 @@
                         data={tableData}>
                       {this.renderColumns(columns)}
                     </el-table>
-                    {this.renderPagination()}
+                    {this.isShowPagination ? this.renderPagination() : null}
                   </div>
               )
             },
