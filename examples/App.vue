@@ -5,10 +5,18 @@
 </template>
 
 <script>
+    import Demo from "./demo"
     export default {
         name: 'app',
         created() {
-            this.$dialog()
+            this.$dialog
+                .config({
+                    props: {
+                        title: '提示',
+                        width: '1200px'
+                    }
+                })
+                .show(Demo)
         }
     }
 </script>

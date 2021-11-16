@@ -11,8 +11,7 @@ Vue.use(TableColumn)
 Vue.use(Pagination)
 Vue.use(Dialog)
 Vue.use(SimpleTable)
-
-Vue.prototype.$dialog = SimpleDialog
+Vue.use(SimpleDialog)
 
 new Vue({
   render: h => h(App),
