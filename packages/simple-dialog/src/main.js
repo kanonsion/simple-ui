@@ -18,7 +18,6 @@ class Dialog {
     }
 
     config(options) {
-        this.instance.isVisible = true
         this.instance.dialogOptions = {
             ...options,
         }
@@ -28,6 +27,7 @@ class Dialog {
     }
 
     show(dom, options = {}) {
+        this.instance.handleOpenDialog()
         this.instance.dom = dom
         this.instance.domOptions = {
             ...options
@@ -37,7 +37,15 @@ class Dialog {
     }
 
     close() {
+        this.instance.handleCloseDialog()
+    }
 
+    closed(callback) {
+        if (!(callback instanceof Function)){
+            console.info('调用closed需要传入回调函数')
+            return
+        }
+        this.instance.closedCallback = callback
     }
 }
 

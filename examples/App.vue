@@ -6,17 +6,33 @@
 
 <script>
     import Demo from "./demo"
+
     export default {
         name: 'app',
+        methods: {
+            handleSubmit(val){
+                console.log(val)
+            }
+        },
         created() {
             this.$dialog
                 .config({
                     props: {
                         title: '提示',
-                        width: '1200px'
+                        width: '200px',
                     }
                 })
-                .show(Demo)
+                .show(Demo, {
+                    props: {
+                        buttonName: '哈哈哈哈哈'
+                    },
+                    on: {
+                        submit: this.handleSubmit.bind(this)
+                    }
+                })
+                .closed(() => {
+                    console.log(1111)
+                })
         }
     }
 </script>
